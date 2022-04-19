@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+
+<title th:text="${title}"></title>
+</head>
+<body class="bg bg-dark">
+	<div class="container mt-5">
+		<div
+			class="col-md-6 offset-3 row p-3 bg-dark text-light border border-light mt-5">
+
+
+			<h1 class="text-center">ToDo App</h1>
+
+
+			<div class="my-3">
+
+
+				<form th:action="@{${isAdd} ? '/save' : '/update'}"
+					th:object="${todo}" method="post">
+					<div class="form-group my-3">
+						<label for="exampleInputEmail1">Title</label> <input type="text"
+							class="form-control" name="title"
+							placeholder="Enter your TODO title">
+					</div>
+					<div class="form-group my-3">
+						<label for="exampleFormControlTextarea1"
+						>Your ToDo</label>
+						<textarea class="form-control" name="description" rows="4"></textarea>
+					</div>
+					<div class="text-center">
+
+						<input type="hidden" class="form-control" th:field="*{id}" />
+						<button type="submit" class="btn btn-light"
+							th:text="${isAdd} ? 'Save' : 'Update'"></button>
+
+
+					</div>
+
+				</form>
+
+			</div>
+
+
+			<div th:if="${successMessage}" class="alert alert-success"
+				role="alert">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close"></a>
+				<strong th:text="${successMessage}"></strong>
+
+				<div class="container my-3">
+					<a th:href="@{/alltodos}" class="btn btn-primary">Check all
+						ToDos</a>
+				</div>
+
+				<div th:if="${errorMessage}" class="alert alert-warning"
+					role="alert">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close"></a>
+					<strong th:text="${errorMessage}"></strong>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+</body>
+</html>
